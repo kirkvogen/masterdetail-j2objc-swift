@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">Master Detail</string>
+	<string name="action_new">New List</string>
+	<string name="title_detail">Detail</string>
+	<string name="hint_detail_title">Enter a title</string>	
+	<string name="hint_detail_items">Enter each word on a line</string>	
+</resources>
