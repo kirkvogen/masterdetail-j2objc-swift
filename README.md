@@ -23,7 +23,7 @@ Building for iOS
 
 Building for Android
 --------
-Open the masterdetail and masterdetail-android projects in Eclipse with Android Developer Tools (ADT). Run masterdetail-android as you would any Android app.
+Open the masterdetail and masterdetail-android projects in Eclipse with Android Development Tools (ADT). Run masterdetail-android as you would any Android app.
 
 License
 ----
