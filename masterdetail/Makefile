@@ -28,12 +28,22 @@ vpath %.java $(SRC_FOLDERS)
 
 OBJC_HEADERS := $(OBJC_FILES:.m=.h)
 
-.PHONY: clean
+TRANSLATE_LIST=$(BUILD_DIR)/.translate_list
 
-translate: $(BUILD_DIR) $(OBJC_FILES) $(OBJC_HEADERS)
+.PHONY: clean init-translate-list
+
+translate: $(BUILD_DIR) init-translate-list $(OBJC_FILES) $(OBJC_HEADERS)
+	@if [ -s $(TRANSLATE_LIST) ]; then \
+		xargs "$(J2OBJC_HOME)/j2objc" $(J2OBJC_FLAGS) -use-arc -classpath bin -d $(BUILD_DIR) < "$(TRANSLATE_LIST)"; \
+	fi
+	rm -f "$(TRANSLATE_LIST)"
 
 $(BUILD_DIR)/%.m $(BUILD_DIR)/%.h: %.java
-	"$(J2OBJC_HOME)/j2objc" $(J2OBJC_FLAGS) -classpath bin -d $(BUILD_DIR) $<
+	@echo $< >> "$(TRANSLATE_LIST)"
+
+init-translate-list: $(BUILD_DIR)
+	@rm -f "$(TRANSLATE_LIST)"
+	@touch "$(TRANSLATE_LIST)"
 
 $(BUILD_DIR):
 	mkdir -p "$(BUILD_DIR)"
