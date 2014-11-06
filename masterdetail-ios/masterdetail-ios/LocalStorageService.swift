@@ -19,7 +19,7 @@ import Foundation
 //
 // An iOS-specific implementation that returns the app's application support directory
 //
-class LocalStorageService: JavaObjectBridge, StorageService {
+class LocalStorageService: NSObject, StorageService {
     
     func getStoragePath() -> JavaIoFile {
         

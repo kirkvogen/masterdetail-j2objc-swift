@@ -14,8 +14,6 @@
 		4A71CCCD19EF652C00A3535F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A71CCCC19EF652C00A3535F /* Images.xcassets */; };
 		4A71CCD019EF652C00A3535F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A71CCCE19EF652C00A3535F /* LaunchScreen.xib */; };
 		4A71CCDC19EF652C00A3535F /* masterdetail_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A71CCDB19EF652C00A3535F /* masterdetail_iosTests.swift */; };
-		4A71CCE819EF65FA00A3535F /* JavaObjectBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A71CCE519EF65FA00A3535F /* JavaObjectBridge.swift */; };
-		4A71CCE919EF65FA00A3535F /* LocalStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A71CCE619EF65FA00A3535F /* LocalStorageService.swift */; };
 		4A71CD0619EF664900A3535F /* prefixes.properties in Resources */ = {isa = PBXBuildFile; fileRef = 4A71CCEB19EF664900A3535F /* prefixes.properties */; };
 		4A71CD1219F0ABA300A3535F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A71CD1119F0ABA300A3535F /* Security.framework */; };
 		4A71CD1419F0ABAA00A3535F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A71CD1319F0ABAA00A3535F /* libz.dylib */; };
@@ -25,6 +23,8 @@
 		4A8106BD19F9F8FA00D6F0B0 /* StorageService.java in Sources */ = {isa = PBXBuildFile; fileRef = 4A8106B619F9F8FA00D6F0B0 /* StorageService.java */; };
 		4A8106BE19F9F8FA00D6F0B0 /* DetailViewModel.java in Sources */ = {isa = PBXBuildFile; fileRef = 4A8106B819F9F8FA00D6F0B0 /* DetailViewModel.java */; };
 		4A8106BF19F9F8FA00D6F0B0 /* ViewModel.java in Sources */ = {isa = PBXBuildFile; fileRef = 4A8106B919F9F8FA00D6F0B0 /* ViewModel.java */; };
+		4AFAFC591A0B0EDB0019F991 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFAFC581A0B0EDB0019F991 /* libicucore.dylib */; };
+		4AFAFC5B1A0B0FDC0019F991 /* LocalStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAFC5A1A0B0FDC0019F991 /* LocalStorageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -63,8 +63,6 @@
 		4A71CCD519EF652C00A3535F /* masterdetail-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "masterdetail-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A71CCDA19EF652C00A3535F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A71CCDB19EF652C00A3535F /* masterdetail_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = masterdetail_iosTests.swift; sourceTree = "<group>"; };
-		4A71CCE519EF65FA00A3535F /* JavaObjectBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaObjectBridge.swift; sourceTree = "<group>"; };
-		4A71CCE619EF65FA00A3535F /* LocalStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageService.swift; sourceTree = "<group>"; };
 		4A71CCEB19EF664900A3535F /* prefixes.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = prefixes.properties; path = ../masterdetail/prefixes.properties; sourceTree = "<group>"; };
 		4A71CD1019F0AA5A00A3535F /* masterdetail-ios-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "masterdetail-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		4A71CD1119F0ABA300A3535F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -75,6 +73,8 @@
 		4A8106B619F9F8FA00D6F0B0 /* StorageService.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = StorageService.java; sourceTree = "<group>"; };
 		4A8106B819F9F8FA00D6F0B0 /* DetailViewModel.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = DetailViewModel.java; sourceTree = "<group>"; };
 		4A8106B919F9F8FA00D6F0B0 /* ViewModel.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = ViewModel.java; sourceTree = "<group>"; };
+		4AFAFC581A0B0EDB0019F991 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		4AFAFC5A1A0B0FDC0019F991 /* LocalStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AFAFC591A0B0EDB0019F991 /* libicucore.dylib in Frameworks */,
 				4A71CD1419F0ABAA00A3535F /* libz.dylib in Frameworks */,
 				4A71CD1219F0ABA300A3535F /* Security.framework in Frameworks */,
 			);
@@ -100,6 +101,7 @@
 		4A71CCB519EF652C00A3535F = {
 			isa = PBXGroup;
 			children = (
+				4AFAFC581A0B0EDB0019F991 /* libicucore.dylib */,
 				4A71CD1319F0ABAA00A3535F /* libz.dylib */,
 				4A71CD1119F0ABA300A3535F /* Security.framework */,
 				4A71CCEA19EF660300A3535F /* masterdetail */,
@@ -121,9 +123,8 @@
 		4A71CCC019EF652C00A3535F /* masterdetail-ios */ = {
 			isa = PBXGroup;
 			children = (
+				4AFAFC5A1A0B0FDC0019F991 /* LocalStorageService.swift */,
 				4A71CD1019F0AA5A00A3535F /* masterdetail-ios-Bridging-Header.h */,
-				4A71CCE519EF65FA00A3535F /* JavaObjectBridge.swift */,
-				4A71CCE619EF65FA00A3535F /* LocalStorageService.swift */,
 				4A71CCC319EF652C00A3535F /* AppDelegate.swift */,
 				4A71CCC519EF652C00A3535F /* MasterViewController.swift */,
 				4A71CCC719EF652C00A3535F /* DetailViewController.swift */,
@@ -350,8 +351,7 @@
 				4A8106BE19F9F8FA00D6F0B0 /* DetailViewModel.java in Sources */,
 				4A8106BD19F9F8FA00D6F0B0 /* StorageService.java in Sources */,
 				4A8106BC19F9F8FA00D6F0B0 /* FlatFileDetailService.java in Sources */,
-				4A71CCE919EF65FA00A3535F /* LocalStorageService.swift in Sources */,
-				4A71CCE819EF65FA00A3535F /* JavaObjectBridge.swift in Sources */,
+				4AFAFC5B1A0B0FDC0019F991 /* LocalStorageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

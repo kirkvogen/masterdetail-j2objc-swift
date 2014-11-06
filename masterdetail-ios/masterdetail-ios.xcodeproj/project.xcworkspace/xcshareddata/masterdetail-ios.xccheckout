@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>66CC3CB0-F978-4692-89D2-6AE7C501E2DA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>masterdetail-ios</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>22EBEA5EFC2DD92D88F841E0B400372583D0C095</key>
+		<string>https://github.com/kirkvogen/masterdetail-j2objc-swift.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>masterdetail-ios/masterdetail-ios.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>22EBEA5EFC2DD92D88F841E0B400372583D0C095</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kirkvogen/masterdetail-j2objc-swift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>22EBEA5EFC2DD92D88F841E0B400372583D0C095</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>22EBEA5EFC2DD92D88F841E0B400372583D0C095</string>
+			<key>IDESourceControlWCCName</key>
+			<string>masterdetail</string>
+		</dict>
+	</array>
+</dict>
+</plist>
