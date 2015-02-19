@@ -54,7 +54,6 @@ TRANSLATE_LIST=$(BUILD_DIR)/.translate_list
 
 translate: $(BUILD_DIR) init-translate-list $(OBJC_FILES) $(OBJC_HEADERS)
 	@if [ -s $(TRANSLATE_LIST) ]; then \
-		../gradlew compileJava && \
 		xargs "$(J2OBJC_HOME)/j2objc" $(J2OBJC_FLAGS) -use-arc -classpath build/classes/main -d $(BUILD_DIR) < "$(TRANSLATE_LIST)"; \
 	fi
 	rm -f "$(TRANSLATE_LIST)"
