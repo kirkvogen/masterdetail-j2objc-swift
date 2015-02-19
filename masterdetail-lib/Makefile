@@ -30,6 +30,10 @@ ifndef DERIVED_FILES_DIR
 		-configuration $(BUILD_CONFIGURATION) -sdk $(SDK) \
 		| grep DERIVED_FILES_DIR \
 		| sed -E "s/[^=]+=[[:space:]]+(.+)/\1/")
+	J2OBJC_HOME := $(shell xcodebuild -project "$(XCODE_PROJECT)" -showBuildSettings \
+		-configuration $(BUILD_CONFIGURATION) -sdk $(SDK) \
+		| grep J2OBJC_HOME \
+		| sed -E "s/[^=]+=[[:space:]]+(.+)/\1/")
 endif
 
 ifeq ($(BUILD_CONFIGURATION), Debug)
@@ -50,7 +54,8 @@ TRANSLATE_LIST=$(BUILD_DIR)/.translate_list
 
 translate: $(BUILD_DIR) init-translate-list $(OBJC_FILES) $(OBJC_HEADERS)
 	@if [ -s $(TRANSLATE_LIST) ]; then \
-		xargs "$(J2OBJC_HOME)/j2objc" $(J2OBJC_FLAGS) -use-arc -classpath bin -d $(BUILD_DIR) < "$(TRANSLATE_LIST)"; \
+		../gradlew compileJava && \
+		xargs "$(J2OBJC_HOME)/j2objc" $(J2OBJC_FLAGS) -use-arc -classpath build/classes/main -d $(BUILD_DIR) < "$(TRANSLATE_LIST)"; \
 	fi
 	rm -f "$(TRANSLATE_LIST)"
 

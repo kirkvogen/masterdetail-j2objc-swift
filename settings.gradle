@@ -1,0 +1,1 @@
+include ':masterdetail-android', ':masterdetail-lib'

@@ -37,7 +37,7 @@
 				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}.h",
 				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}.m",
 			);
-			script = "cd ../masterdetail\nmake";
+			script = "cd ../masterdetail-lib\nmake";
 		};
 /* End PBXBuildRule section */
 
@@ -63,7 +63,7 @@
 		4A71CCD519EF652C00A3535F /* masterdetail-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "masterdetail-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A71CCDA19EF652C00A3535F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A71CCDB19EF652C00A3535F /* masterdetail_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = masterdetail_iosTests.swift; sourceTree = "<group>"; };
-		4A71CCEB19EF664900A3535F /* prefixes.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = prefixes.properties; path = ../masterdetail/prefixes.properties; sourceTree = "<group>"; };
+		4A71CCEB19EF664900A3535F /* prefixes.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = prefixes.properties; path = "../masterdetail-lib/prefixes.properties"; sourceTree = "<group>"; };
 		4A71CD1019F0AA5A00A3535F /* masterdetail-ios-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "masterdetail-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		4A71CD1119F0ABA300A3535F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4A71CD1319F0ABAA00A3535F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -176,7 +176,7 @@
 				4A71CCED19EF664900A3535F /* main */,
 			);
 			name = src;
-			path = ../masterdetail/src;
+			path = "../masterdetail-lib/src";
 			sourceTree = "<group>";
 		};
 		4A71CCED19EF664900A3535F /* main */ = {
