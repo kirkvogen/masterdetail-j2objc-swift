@@ -23,5 +23,5 @@ import java.io.File;
  */
 public interface StorageService {
 
-	File getStoragePath();
+    File getStoragePath();
 }

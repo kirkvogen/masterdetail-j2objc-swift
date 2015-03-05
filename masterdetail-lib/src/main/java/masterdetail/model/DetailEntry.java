@@ -22,31 +22,31 @@ import java.util.ArrayList;
  * A model class for an item on the master list. 
  */
 public class DetailEntry {
-	private int id;
-	private String title;
-	private List<String> words = new ArrayList<String>();
-	
-	public int getId() {
-		return id;
-	}
+    private int id;
+    private String title;
+    private List<String> words = new ArrayList<String>();
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public List<String> getWords() {
-		return words;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setWords(List<String> words) {
-		this.words = words;
-	}
+    public List<String> getWords() {
+        return words;
+    }
+
+    public void setWords(List<String> words) {
+        this.words = words;
+    }
 }

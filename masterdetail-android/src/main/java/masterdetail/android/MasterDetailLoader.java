@@ -25,73 +25,73 @@ import android.content.Context;
 
 public class MasterDetailLoader extends AsyncTaskLoader<List<DetailEntry>> {
 
-	private DetailService detailService;
+    private DetailService detailService;
 
-	private List<DetailEntry> data;
-	
-	public MasterDetailLoader(Context ctx, DetailService detailService) {
-		super(ctx);
-		this.detailService = detailService;
-	}
-	
-	@Override
-	public List<DetailEntry> loadInBackground() {
-		List<DetailEntry> lists = detailService.findAll();
-		
-		return lists;
-	}
-	
-	@Override
-	public void deliverResult(List<DetailEntry> newData) {
-		if (isReset()) {
-			releaseResources(newData);
-			return;
-		}
-		
-		List<DetailEntry> oldData = data;
-		data = newData;
-		
-		if (isStarted())
-		{
-			super.deliverResult(newData);
-		}
-		
-		if (oldData != null && oldData != newData) {
-			releaseResources(oldData);
-		}
-	}
-	
-	@Override
-	protected void onStartLoading() {
-		if (data != null) {
-			deliverResult(data);
-		}
-		
-		if (takeContentChanged() || data == null) {
-			forceLoad();
-		}
-	}
+    private List<DetailEntry> data;
 
-	@Override
-	protected void onStopLoading() {
-		cancelLoad();
-	}
-	
-	@Override
-	protected void onReset() {
-		onStopLoading();
-		
-		if (data != null) {
-			releaseResources(data);
-			data = null;
-		}
-	}
-	
-	private void releaseResources(List<DetailEntry> releasedData) {
-		// All the resources associated with the loader should be released here. For example, a
-		// cursor should be closed.
-		//
-		// For the DetailService, there is nothing to release.
-	}
+    public MasterDetailLoader(Context ctx, DetailService detailService) {
+        super(ctx);
+        this.detailService = detailService;
+    }
+
+    @Override
+    public List<DetailEntry> loadInBackground() {
+        List<DetailEntry> lists = detailService.findAll();
+
+        return lists;
+    }
+
+    @Override
+    public void deliverResult(List<DetailEntry> newData) {
+        if (isReset()) {
+            releaseResources(newData);
+            return;
+        }
+
+        List<DetailEntry> oldData = data;
+        data = newData;
+
+        if (isStarted())
+        {
+            super.deliverResult(newData);
+        }
+
+        if (oldData != null && oldData != newData) {
+            releaseResources(oldData);
+        }
+    }
+
+    @Override
+    protected void onStartLoading() {
+        if (data != null) {
+            deliverResult(data);
+        }
+
+        if (takeContentChanged() || data == null) {
+            forceLoad();
+        }
+    }
+
+    @Override
+    protected void onStopLoading() {
+        cancelLoad();
+    }
+
+    @Override
+    protected void onReset() {
+        onStopLoading();
+
+        if (data != null) {
+            releaseResources(data);
+            data = null;
+        }
+    }
+
+    private void releaseResources(List<DetailEntry> releasedData) {
+        // All the resources associated with the loader should be released here. For example, a
+        // cursor should be closed.
+        //
+        // For the DetailService, there is nothing to release.
+    }
 
 }

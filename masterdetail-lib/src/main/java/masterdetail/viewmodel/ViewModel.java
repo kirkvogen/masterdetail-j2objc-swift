@@ -24,29 +24,29 @@ import java.beans.PropertyChangeSupport;
  * means of updating the view.
  */
 public class ViewModel {
-	private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    private PropertyChangeSupport change = new PropertyChangeSupport(this);
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		change.addPropertyChangeListener(listener);
-	}
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        change.addPropertyChangeListener(listener);
+    }
 
-	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-		change.addPropertyChangeListener(propertyName, listener);
-	}
-	
-	public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
-		change.firePropertyChange(propertyName, oldValue, newValue);
-	}
-	
-	public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
-		change.firePropertyChange(propertyName, oldValue, newValue);
-	}
-	
-	public void firePropertyChange(String propertyName, int oldValue, int newValue) {
-		change.firePropertyChange(propertyName, oldValue, newValue);
-	}
-	
-	public void firePropertyChange(PropertyChangeEvent event) {
-		change.firePropertyChange(event);
-	}
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        change.addPropertyChangeListener(propertyName, listener);
+    }
+
+    public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        change.firePropertyChange(propertyName, oldValue, newValue);
+    }
+
+    public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
+        change.firePropertyChange(propertyName, oldValue, newValue);
+    }
+
+    public void firePropertyChange(String propertyName, int oldValue, int newValue) {
+        change.firePropertyChange(propertyName, oldValue, newValue);
+    }
+
+    public void firePropertyChange(PropertyChangeEvent event) {
+        change.firePropertyChange(event);
+    }
 }

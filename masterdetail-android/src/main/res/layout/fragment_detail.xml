@@ -5,25 +5,25 @@
     android:orientation="vertical"
     tools:context=".DetailFragment" >
 
-	<EditText
-	    android:id="@+id/masterdetail_detail_title"
-	    style="?android:attr/textAppearanceLarge"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="top"
-	    android:hint="@string/hint_detail_title"
-	    android:inputType="text"
-	    android:lines="1"
-	    android:maxLines="1"
-	    android:scrollHorizontally="true"
-	    android:ellipsize="end" />
+    <EditText
+        android:id="@+id/masterdetail_detail_title"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:hint="@string/hint_detail_title"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end" />
 
-	<EditText
-	    android:id="@+id/masterdetail_detail_words"
-		android:hint="@string/hint_detail_items"
-		style="?android:attr/textAppearanceLarge"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:padding="16dp"
-		android:gravity="top" />
+    <EditText
+        android:id="@+id/masterdetail_detail_words"
+        android:hint="@string/hint_detail_items"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:gravity="top" />
 </LinearLayout>

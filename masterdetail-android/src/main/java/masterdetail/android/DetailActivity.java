@@ -37,69 +37,69 @@ import android.widget.EditText;
  */
 public class DetailActivity extends Activity implements DetailFragment.Callbacks {
 
-	private DetailViewModel viewModel;
+    private DetailViewModel viewModel;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_detail);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
-		// Show the Up button in the action bar.
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+        // Show the Up button in the action bar.
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		// savedInstanceState is non-null when there is fragment state saved from previous
-		// configurations of this activity (e.g. when rotating the screen from portrait to
-		// landscape). In this case, the fragment will automatically be re-added to its container so
-		// we don't need to manually add it. For more information, see the Fragments API guide at:
-		//
-		// http://developer.android.com/guide/components/fragments.html
-		//
-		if (savedInstanceState == null) {
-			// Create the detail fragment and add it to the activity using a fragment transaction.
-			Bundle arguments = new Bundle();
-			arguments.putInt(DetailFragment.ARG_ITEM_ID,
-					getIntent().getIntExtra(DetailFragment.ARG_ITEM_ID, 0));
-			DetailFragment fragment = new DetailFragment();
-			fragment.setArguments(arguments);
-			getFragmentManager().beginTransaction()
-					.add(R.id.masterdetail_detail_container, fragment)
-					.commit();
-		}
-	}
+        // savedInstanceState is non-null when there is fragment state saved from previous
+        // configurations of this activity (e.g. when rotating the screen from portrait to
+        // landscape). In this case, the fragment will automatically be re-added to its container so
+        // we don't need to manually add it. For more information, see the Fragments API guide at:
+        //
+        // http://developer.android.com/guide/components/fragments.html
+        //
+        if (savedInstanceState == null) {
+            // Create the detail fragment and add it to the activity using a fragment transaction.
+            Bundle arguments = new Bundle();
+            arguments.putInt(DetailFragment.ARG_ITEM_ID,
+                    getIntent().getIntExtra(DetailFragment.ARG_ITEM_ID, 0));
+            DetailFragment fragment = new DetailFragment();
+            fragment.setArguments(arguments);
+            getFragmentManager().beginTransaction()
+                    .add(R.id.masterdetail_detail_container, fragment)
+                    .commit();
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == android.R.id.home) {
-			
-			final EditText title = (EditText) findViewById(R.id.masterdetail_detail_title);
-			final EditText words = (EditText) findViewById(R.id.masterdetail_detail_words);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
 
-			viewModel.save(title.getText().toString(), words.getText().toString());
-			
-			Intent upIntent = NavUtils.getParentActivityIntent(this);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				// This activity is NOT part of this app's task, so create a new task when
-				// navigating up, with a synthesized back stack.
-				TaskStackBuilder.create(this)
-						// Add all of this activity's parents to the back stack
-						.addNextIntentWithParentStack(upIntent)
-						// Navigate up to the closest parent
-						.startActivities();
-			} else {
-				// This activity is part of this app's task, so simply navigate up to the logical
-				// parent activity.
-				NavUtils.navigateUpTo(this, upIntent);
-			}
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+            final EditText title = (EditText) findViewById(R.id.masterdetail_detail_title);
+            final EditText words = (EditText) findViewById(R.id.masterdetail_detail_words);
 
-	@Override
-	public void onViewModelCreated(DetailViewModel viewModel) {
-		this.viewModel = viewModel;
-	}
+            viewModel.save(title.getText().toString(), words.getText().toString());
+
+            Intent upIntent = NavUtils.getParentActivityIntent(this);
+            if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                // This activity is NOT part of this app's task, so create a new task when
+                // navigating up, with a synthesized back stack.
+                TaskStackBuilder.create(this)
+                        // Add all of this activity's parents to the back stack
+                        .addNextIntentWithParentStack(upIntent)
+                        // Navigate up to the closest parent
+                        .startActivities();
+            } else {
+                // This activity is part of this app's task, so simply navigate up to the logical
+                // parent activity.
+                NavUtils.navigateUpTo(this, upIntent);
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onViewModelCreated(DetailViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     @Override
     public void onListSaved() {

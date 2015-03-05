@@ -10,5 +10,5 @@ import masterdetail.viewmodel.ViewModel;
  */
 public interface ViewModelListener<E extends ViewModel> {
 
-	void onViewModelCreated(E viewModel);
+    void onViewModelCreated(E viewModel);
 }

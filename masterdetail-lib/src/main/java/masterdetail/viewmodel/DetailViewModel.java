@@ -30,74 +30,74 @@ public class DetailViewModel extends ViewModel {
     public static final String WORDS = "words";
 
     private String title;
-	private String words;
-	private DetailService detailService;
-	private DetailEntry detailEntry = new DetailEntry();
-	private String listDelimiter = System.getProperty("line.separator");
+    private String words;
+    private DetailService detailService;
+    private DetailEntry detailEntry = new DetailEntry();
+    private String listDelimiter = System.getProperty("line.separator");
 
-	public DetailViewModel(DetailService detailService) {
-		this.detailService = detailService;
-	}
-	
-	/**
-	 * Creates a new instance using the provided delimiter. The delimiter will be used to display
-	 * the content in the view. For example, using newline as a delimiter will present each word
-	 * on one line. Another view might wish to present the words as one line, so a space character
-	 * could be used.
-	 * 
-	 * @param detailService The service for detail item persistence
-	 * @param listDelimiter The delimiter.
-	 */
-	public DetailViewModel(DetailService detailService, String listDelimiter) {
-		this(detailService);
-		this.listDelimiter = listDelimiter;
-	}
+    public DetailViewModel(DetailService detailService) {
+        this.detailService = detailService;
+    }
+
+    /**
+     * Creates a new instance using the provided delimiter. The delimiter will be used to display
+     * the content in the view. For example, using newline as a delimiter will present each word
+     * on one line. Another view might wish to present the words as one line, so a space character
+     * could be used.
+     *
+     * @param detailService The service for detail item persistence
+     * @param listDelimiter The delimiter.
+     */
+    public DetailViewModel(DetailService detailService, String listDelimiter) {
+        this(detailService);
+        this.listDelimiter = listDelimiter;
+    }
 
     public void init(int id) {
-		detailEntry = detailService.find(id);
-		setTitle(detailEntry.getTitle());
-		setWords(detailEntry.getWords());		
-	}
+        detailEntry = detailService.find(id);
+        setTitle(detailEntry.getTitle());
+        setWords(detailEntry.getWords());
+    }
 
     public String getTitle() {
-		return title;
-	}
+        return title;
+    }
 
-	public void setTitle(String title) {
-		firePropertyChange(TITLE, this.title, title);
-		this.title = title;
-	}
-	
-	public String getWords() {
-		return words;
-	}
-	
-	public void setWords(String words) {
-		firePropertyChange(WORDS, this.words, words);
-		this.words = words;
-	}
-	
-	public void setWords(List<String> words) {
-		if (words == null)
-			return;
-		
-		StringBuilder content = new StringBuilder();
-		for (String word : words) {
-			content.append(word);
-			content.append(listDelimiter);
-		}
-		
-		setWords(content.toString());
-	}
+    public void setTitle(String title) {
+        firePropertyChange(TITLE, this.title, title);
+        this.title = title;
+    }
 
-	public void save(String newTitle, String newWords) {
-		title = newTitle;
-		words = newWords;
+    public String getWords() {
+        return words;
+    }
 
-		detailEntry.setTitle(title);
-		
-		detailEntry.setWords(Arrays.asList(words.split(System.getProperty("line.separator"))));
-		
-		detailService.update(detailEntry);
-	}
+    public void setWords(String words) {
+        firePropertyChange(WORDS, this.words, words);
+        this.words = words;
+    }
+
+    public void setWords(List<String> words) {
+        if (words == null)
+            return;
+
+        StringBuilder content = new StringBuilder();
+        for (String word : words) {
+            content.append(word);
+            content.append(listDelimiter);
+        }
+
+        setWords(content.toString());
+    }
+
+    public void save(String newTitle, String newWords) {
+        title = newTitle;
+        words = newWords;
+
+        detailEntry.setTitle(title);
+
+        detailEntry.setWords(Arrays.asList(words.split(System.getProperty("line.separator"))));
+
+        detailService.update(detailEntry);
+    }
 }

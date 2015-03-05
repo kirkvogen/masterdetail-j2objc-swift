@@ -42,75 +42,75 @@ import org.junit.Test;
  * Integration tests the {@link FlatFileDetailService}
  */
 public class FlatFileDetailServiceIT {
-	
-	TempFolderStorageService storageService = new TempFolderStorageService();
-	
-	DetailService service = new FlatFileDetailService(storageService);
-	
-	@After
-	public void deleteFiles() {
-		storageService.reset();
-	}
-	
-	@Test
-	public void create() {
-		assertThat(service.create(), is(notNullValue()));
-	}
-	
-	@Test
-	public void update() {
-		DetailEntry list = service.create();
-		list.setTitle("Some title");
-		list.setWords(Collections.singletonList("Word1"));
-		
-		service.update(list);
-		
-		DetailEntry queried = service.find(list.getId());
-		
-		assertEquals(list.getTitle(), queried.getTitle());
-		assertEquals(list.getWords(), queried.getWords());
-	}
-	
-	@Test
-	public void delete() {
-		DetailEntry list = service.create();
-		service.delete(list);
-		assertThat(service.find(list.getId()), is(nullValue()));
-	}
-	
-	@Test
-	public void findAll() {
-		service.create();
-		service.create();
-		
-		List<DetailEntry> lists = service.findAll();
-		assertEquals(2, lists.size());
-		assertThat(lists.get(0).getId(), not(equalTo(lists.get(1).getId())));
-	}
-	
-	
-	class TempFolderStorageService implements StorageService {
-		File storageDir;
-		
-		@Override
-		public File getStoragePath() {
-			if (storageDir == null) {
-				try {
-					storageDir = File.createTempFile(FlatFileDetailServiceIT.class.getSimpleName(), "tmp");
-				} catch (IOException e) {
-					fail("Unable to create temporary folder");
-				}
-				storageDir.delete();
-				storageDir.mkdirs();
-			}
-			
-			return storageDir;
-		}
-		
-		public void reset() {
-			if (storageDir != null) {
-				storageDir.delete();
-			}
-		}
-	}
+
+    TempFolderStorageService storageService = new TempFolderStorageService();
+
+    DetailService service = new FlatFileDetailService(storageService);
+
+    @After
+    public void deleteFiles() {
+        storageService.reset();
+    }
+
+    @Test
+    public void create() {
+        assertThat(service.create(), is(notNullValue()));
+    }
+
+    @Test
+    public void update() {
+        DetailEntry list = service.create();
+        list.setTitle("Some title");
+        list.setWords(Collections.singletonList("Word1"));
+
+        service.update(list);
+
+        DetailEntry queried = service.find(list.getId());
+
+        assertEquals(list.getTitle(), queried.getTitle());
+        assertEquals(list.getWords(), queried.getWords());
+    }
+
+    @Test
+    public void delete() {
+        DetailEntry list = service.create();
+        service.delete(list);
+        assertThat(service.find(list.getId()), is(nullValue()));
+    }
+
+    @Test
+    public void findAll() {
+        service.create();
+        service.create();
+
+        List<DetailEntry> lists = service.findAll();
+        assertEquals(2, lists.size());
+        assertThat(lists.get(0).getId(), not(equalTo(lists.get(1).getId())));
+    }
+
+
+    class TempFolderStorageService implements StorageService {
+        File storageDir;
+
+        @Override
+        public File getStoragePath() {
+            if (storageDir == null) {
+                try {
+                    storageDir = File.createTempFile(FlatFileDetailServiceIT.class.getSimpleName(), "tmp");
+                } catch (IOException e) {
+                    fail("Unable to create temporary folder");
+                }
+                storageDir.delete();
+                storageDir.mkdirs();
+            }
+
+            return storageDir;
+        }
+
+        public void reset() {
+            if (storageDir != null) {
+                storageDir.delete();
+            }
+        }
+    }
 }

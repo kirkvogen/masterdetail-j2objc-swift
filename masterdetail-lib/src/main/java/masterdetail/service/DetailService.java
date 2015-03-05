@@ -24,17 +24,17 @@ import masterdetail.model.DetailEntry;
  */
 public interface DetailService {
 
-	DetailEntry create();
+    DetailEntry create();
 
-	void delete (int id);
+    void delete (int id);
 
-	void delete (DetailEntry detailEntry);
+    void delete (DetailEntry detailEntry);
 
-	void update (DetailEntry detailEntry);
+    void update (DetailEntry detailEntry);
 
-	DetailEntry find(int id);
+    DetailEntry find(int id);
 
-	Boolean exists(int id);
+    Boolean exists(int id);
 
-	List<DetailEntry> findAll();
+    List<DetailEntry> findAll();
 }

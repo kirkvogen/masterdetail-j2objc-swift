@@ -26,29 +26,29 @@ import android.widget.BaseAdapter;
  */
 public class ServiceAdapter extends BaseAdapter {
 
-	private DetailService service;
+    private DetailService service;
 
-	public ServiceAdapter(DetailService service) {
-		this.service = service;
-	}
-	
-	@Override
-	public int getCount() {
-		return service.findAll().size();
-	}
+    public ServiceAdapter(DetailService service) {
+        this.service = service;
+    }
 
-	@Override
-	public DetailEntry getItem(int position) {
-		return service.find(position);
-	}
+    @Override
+    public int getCount() {
+        return service.findAll().size();
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public DetailEntry getItem(int position) {
+        return service.find(position);
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		return null;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return null;
+    }
 }

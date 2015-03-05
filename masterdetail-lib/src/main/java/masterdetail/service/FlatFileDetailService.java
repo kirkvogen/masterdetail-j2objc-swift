@@ -34,183 +34,183 @@ import masterdetail.model.DetailEntry;
  */
 public class FlatFileDetailService implements DetailService {
 
-	private StorageService storageService;
-	
-	public FlatFileDetailService(StorageService storageService) {
-		this.storageService = storageService;
-	}
+    private StorageService storageService;
 
-	private File getStorageDir() {
-		File storageDir = new File(this.storageService.getStoragePath(), "list");
-		storageDir.mkdirs();
-		
-		return storageDir;
-	}
-	
-	private File getFile(int filenum) {
-		return new File(getStorageDir(), String.valueOf(filenum));
-	}
+    public FlatFileDetailService(StorageService storageService) {
+        this.storageService = storageService;
+    }
 
-	@Override
-	public DetailEntry create() {
-		List<Integer> ids = findAllIds();
+    private File getStorageDir() {
+        File storageDir = new File(this.storageService.getStoragePath(), "list");
+        storageDir.mkdirs();
 
-		int newId = 0;
-		int lastId = newId;
+        return storageDir;
+    }
 
-		for (int id : ids) {
-			newId = id + 1;
+    private File getFile(int filenum) {
+        return new File(getStorageDir(), String.valueOf(filenum));
+    }
 
-			if (lastId + 1 < newId) {
-				newId = lastId;
-				break;
-			}
+    @Override
+    public DetailEntry create() {
+        List<Integer> ids = findAllIds();
 
-			lastId = newId;
-		}
+        int newId = 0;
+        int lastId = newId;
 
-		createEmptyFile(newId);
+        for (int id : ids) {
+            newId = id + 1;
 
-		DetailEntry list = new DetailEntry();
-		list.setId(newId);
-		return list;
-	}
+            if (lastId + 1 < newId) {
+                newId = lastId;
+                break;
+            }
 
-	private void createEmptyFile(int newId) {
-		File newFile = new File(getStorageDir(), String.valueOf(newId));
-		
-		try {
-			newFile.createNewFile();
-		} catch (IOException e) {
-			throw new RuntimeException("Unable to create item with ID: " + newId, e);
-		}
-	}
+            lastId = newId;
+        }
 
-	@Override
-	public void delete(int id) {
-		getFile(id).delete();
-	}
+        createEmptyFile(newId);
 
-	@Override
-	public void delete(DetailEntry detailEntry) {
-		delete(detailEntry.getId());
-	}
+        DetailEntry list = new DetailEntry();
+        list.setId(newId);
+        return list;
+    }
 
-	@Override
-	public void update(DetailEntry detailEntry) {
-		FileWriter out = null;
-		
-		try {
-			out = new FileWriter(getFile(detailEntry.getId()));
-			writeContent(detailEntry.getTitle(), detailEntry.getWords(), out);
-		} catch (IOException e) {
-			throw new RuntimeException("Unable to write updates to item with ID: "
-					+ detailEntry.getId(), e);
-		} finally {
-			closeQuietly(out);
-		}
-	}
-	
-	private void writeContent(String title, List<String> words, Writer out) throws IOException {
-		BufferedWriter buf = new BufferedWriter(out);
-		
-		buf.write(title);
-		buf.newLine();
-		
-		for (String word : words) {
-			buf.write(word);
-			buf.newLine();
-		}
-		
-		buf.flush();
-	}
+    private void createEmptyFile(int newId) {
+        File newFile = new File(getStorageDir(), String.valueOf(newId));
 
-	@Override
-	public DetailEntry find(int id) {
-		FileReader in = null;
-		DetailEntry list = null;
-		
-		File file = getFile(id);
-		if (!file.exists())
-		{
-			return null;
-		}
-		
-		try	{
-			in = new FileReader(file);
-			list = readContent(in);
-		} catch (IOException e) {
-			throw new RuntimeException("Unable to read the item with ID: " + id, e);
-		} finally {
-			closeQuietly(in);
-		}
-		
-		list.setId(id);
-		return list;
-	}
-	
-	private static void closeQuietly(Reader in)	{
-		if (in != null)
-		{
-			try {
-				in.close();
-			} catch (IOException e) {
-				// There is nothing more that can be done
-			}
-		}
-	}
-	
-	private static void closeQuietly(Writer out)	{
-		if (out != null) {
-			try {
-				out.close();
-			} catch (IOException e) {
-				// There is nothing more that can be done
-			}
-		}
-	}
+        try {
+            newFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to create item with ID: " + newId, e);
+        }
+    }
 
-	private static DetailEntry readContent(Reader in) throws IOException {
-		ArrayList<String> words = new ArrayList<String> ();
-		DetailEntry list = new DetailEntry();
-		
-		BufferedReader buf = new BufferedReader(in);
-		list.setTitle(buf.readLine());
-		
-		String line;
-		while ((line = buf.readLine()) != null)	{
-			words.add(line);
-		}
-		
-		list.setWords(words);
-		return list;
-	}
+    @Override
+    public void delete(int id) {
+        getFile(id).delete();
+    }
 
-	@Override
-	public Boolean exists(int id) {
-		return getFile(id).exists();
-	}
+    @Override
+    public void delete(DetailEntry detailEntry) {
+        delete(detailEntry.getId());
+    }
 
-	@Override
-	public List<DetailEntry> findAll() {
-		ArrayList<DetailEntry> detailEntries = new ArrayList<DetailEntry> ();
-		
-		for (int id : findAllIds()) {
-			detailEntries.add(find(id));
-		}
+    @Override
+    public void update(DetailEntry detailEntry) {
+        FileWriter out = null;
 
-		return detailEntries;
-	}
+        try {
+            out = new FileWriter(getFile(detailEntry.getId()));
+            writeContent(detailEntry.getTitle(), detailEntry.getWords(), out);
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to write updates to item with ID: "
+                    + detailEntry.getId(), e);
+        } finally {
+            closeQuietly(out);
+        }
+    }
 
-	private List<Integer> findAllIds() {
-		ArrayList<Integer> ids = new ArrayList<Integer> ();
-		
-		for (File file : getStorageDir().listFiles()) {
-			ids.add(Integer.valueOf(file.getName()));
-		}
+    private void writeContent(String title, List<String> words, Writer out) throws IOException {
+        BufferedWriter buf = new BufferedWriter(out);
 
-		Collections.sort(ids);
-		
-		return ids;
-	}
+        buf.write(title);
+        buf.newLine();
+
+        for (String word : words) {
+            buf.write(word);
+            buf.newLine();
+        }
+
+        buf.flush();
+    }
+
+    @Override
+    public DetailEntry find(int id) {
+        FileReader in = null;
+        DetailEntry list = null;
+
+        File file = getFile(id);
+        if (!file.exists())
+        {
+            return null;
+        }
+
+        try    {
+            in = new FileReader(file);
+            list = readContent(in);
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to read the item with ID: " + id, e);
+        } finally {
+            closeQuietly(in);
+        }
+
+        list.setId(id);
+        return list;
+    }
+
+    private static void closeQuietly(Reader in)    {
+        if (in != null)
+        {
+            try {
+                in.close();
+            } catch (IOException e) {
+                // There is nothing more that can be done
+            }
+        }
+    }
+
+    private static void closeQuietly(Writer out)    {
+        if (out != null) {
+            try {
+                out.close();
+            } catch (IOException e) {
+                // There is nothing more that can be done
+            }
+        }
+    }
+
+    private static DetailEntry readContent(Reader in) throws IOException {
+        ArrayList<String> words = new ArrayList<String> ();
+        DetailEntry list = new DetailEntry();
+
+        BufferedReader buf = new BufferedReader(in);
+        list.setTitle(buf.readLine());
+
+        String line;
+        while ((line = buf.readLine()) != null)    {
+            words.add(line);
+        }
+
+        list.setWords(words);
+        return list;
+    }
+
+    @Override
+    public Boolean exists(int id) {
+        return getFile(id).exists();
+    }
+
+    @Override
+    public List<DetailEntry> findAll() {
+        ArrayList<DetailEntry> detailEntries = new ArrayList<DetailEntry> ();
+
+        for (int id : findAllIds()) {
+            detailEntries.add(find(id));
+        }
+
+        return detailEntries;
+    }
+
+    private List<Integer> findAllIds() {
+        ArrayList<Integer> ids = new ArrayList<Integer> ();
+
+        for (File file : getStorageDir().listFiles()) {
+            ids.add(Integer.valueOf(file.getName()));
+        }
+
+        Collections.sort(ids);
+
+        return ids;
+    }
 }

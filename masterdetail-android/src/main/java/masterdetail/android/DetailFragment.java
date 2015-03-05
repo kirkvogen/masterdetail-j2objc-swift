@@ -38,11 +38,11 @@ import android.widget.EditText;
  * a {@link MasterActivity} in two-pane mode (on tablets) or a {@link DetailActivity} on handsets.
  */
 public class DetailFragment extends Fragment {
-	
-	/** The fragment argument representing the item ID that this fragment represents. */
-	public static final String ARG_ITEM_ID = "item_id";
 
-	private DetailViewModel viewModel;
+    /** The fragment argument representing the item ID that this fragment represents. */
+    public static final String ARG_ITEM_ID = "item_id";
+
+    private DetailViewModel viewModel;
 
     public interface Callbacks extends ViewModelListener<DetailViewModel> {
         void onListSaved();
@@ -55,32 +55,32 @@ public class DetailFragment extends Fragment {
         public void onViewModelCreated(DetailViewModel viewModel) {}
     };
 
-	/**
-	 * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
-	 * screen orientation changes).
-	 */
-	public DetailFragment() {
-	}
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
+     * screen orientation changes).
+     */
+    public DetailFragment() {
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         if (!(activity instanceof Callbacks)) {
             throw new IllegalStateException("Activity must implement fragment's callbacks.");
         }
 
         callbacks = (Callbacks) activity;
-	}
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		StorageService storageService = new LocalStorageService(getActivity());
-		viewModel = new DetailViewModel(new FlatFileDetailService(storageService));
-		callbacks.onViewModelCreated(viewModel);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        StorageService storageService = new LocalStorageService(getActivity());
+        viewModel = new DetailViewModel(new FlatFileDetailService(storageService));
+        callbacks.onViewModelCreated(viewModel);
+    }
 
     @Override
     public void onDetach() {
@@ -90,34 +90,34 @@ public class DetailFragment extends Fragment {
         callbacks = dummyCallbacks;
     }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		final View rootView = inflater.inflate(R.layout.fragment_detail, container,
-				false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View rootView = inflater.inflate(R.layout.fragment_detail, container,
+                false);
 
-		final EditText title = (EditText) rootView.findViewById(
-				R.id.masterdetail_detail_title);
-		final EditText words = (EditText) rootView.findViewById(
-				R.id.masterdetail_detail_words);
-		
-		viewModel.addPropertyChangeListener(new PropertyChangeListener() {
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent event) {
-			if (DetailViewModel.TITLE.equals(event.getPropertyName())) {
-				title.setText((String) event.getNewValue());
-			}
-			else if (DetailViewModel.WORDS.equals(event.getPropertyName())) {
-				words.setText((String) event.getNewValue());
-			}
-			}
-		});
-		
-		viewModel.init(getArguments().getInt(ARG_ITEM_ID));
+        final EditText title = (EditText) rootView.findViewById(
+                R.id.masterdetail_detail_title);
+        final EditText words = (EditText) rootView.findViewById(
+                R.id.masterdetail_detail_words);
 
-		return rootView;
-	}
+        viewModel.addPropertyChangeListener(new PropertyChangeListener() {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent event) {
+            if (DetailViewModel.TITLE.equals(event.getPropertyName())) {
+                title.setText((String) event.getNewValue());
+            }
+            else if (DetailViewModel.WORDS.equals(event.getPropertyName())) {
+                words.setText((String) event.getNewValue());
+            }
+            }
+        });
+
+        viewModel.init(getArguments().getInt(ARG_ITEM_ID));
+
+        return rootView;
+    }
 
     @Override
     public void onPause() {

@@ -26,15 +26,15 @@ import android.content.Context;
  */
 public class LocalStorageService implements StorageService {
 
-	private Context context;
+    private Context context;
 
-	public LocalStorageService(Context context)
-	{
-		this.context = context;
-	}
-	
-	@Override
-	public File getStoragePath() {
-		return context.getFilesDir();
-	}
+    public LocalStorageService(Context context)
+    {
+        this.context = context;
+    }
+
+    @Override
+    public File getStoragePath() {
+        return context.getFilesDir();
+    }
 }
