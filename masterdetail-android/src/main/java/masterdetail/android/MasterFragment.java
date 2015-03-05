@@ -53,32 +53,25 @@ public class MasterFragment extends ListFragment implements LoaderCallbacks<List
 	 */
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
-	/** The fragment's current callback object, which is notified of list item clicks. */
-	private Callbacks mCallbacks = sDummyCallbacks;
+    /**
+     * A callback interface that all activities containing this fragment must
+     * implement. This mechanism allows activities to be notified of item
+     * selections.
+     */
+    public interface Callbacks {
+        public void onItemSelected(int id);
+        public void onLoaderCreated(Loader loader);
+    }
+
+    private static Callbacks dummyCallbacks = new Callbacks() {
+        public void onItemSelected(int id) {}
+        public void onLoaderCreated(Loader loader) {}
+    };
+
+    private Callbacks callbacks = dummyCallbacks;
 
 	/** The current activated item position. Only used on tablets. */
 	private int mActivatedPosition = ListView.INVALID_POSITION;
-
-	/**
-	 * A callback interface that all activities containing this fragment must implement. This
-	 * mechanism allows activities to be notified of item selections.
-	 */
-	public interface Callbacks {
-		/**
-		 * Callback for when an item has been selected.
-		 */
-		public void onItemSelected(int id);
-	}
-
-	/**
-	 * A dummy implementation of the {@link Callbacks} interface that does nothing. Used only when
-	 * this fragment is not attached to an activity.
-	 */
-	private static Callbacks sDummyCallbacks = new Callbacks() {
-		@Override
-		public void onItemSelected(int id) {
-		}
-	};
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
@@ -90,8 +83,14 @@ public class MasterFragment extends ListFragment implements LoaderCallbacks<List
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		setEmptyText("Please create a list");
+        setEmptyText(getString(R.string.please_create_a_list));
 	}
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(THE_LOADER, null, this);
+    }
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +117,7 @@ public class MasterFragment extends ListFragment implements LoaderCallbacks<List
 			throw new IllegalStateException("Activity must implement fragment's callbacks.");
 		}
 
-		mCallbacks = (Callbacks) activity;
+		callbacks = (Callbacks) activity;
 	}
 
 	@Override
@@ -126,7 +125,7 @@ public class MasterFragment extends ListFragment implements LoaderCallbacks<List
 		super.onDetach();
 
 		// Reset the active callbacks interface to the dummy implementation.
-		mCallbacks = sDummyCallbacks;
+		callbacks = dummyCallbacks;
 	}
 
 	@Override
@@ -136,7 +135,7 @@ public class MasterFragment extends ListFragment implements LoaderCallbacks<List
 		// Notify the active callbacks interface (the activity, if the fragment is attached to one)
 		// that an item has been selected.
 		DetailEntry list = (DetailEntry) getListAdapter().getItem(position);
-		mCallbacks.onItemSelected(list.getId());
+		callbacks.onItemSelected(list.getId());
 	}
 
 	@Override
@@ -176,6 +175,7 @@ public class MasterFragment extends ListFragment implements LoaderCallbacks<List
 
 		MasterDetailLoader loader = new MasterDetailLoader(getActivity(), detailService);
 
+        callbacks.onLoaderCreated(loader);
 		return loader;
 	}
 

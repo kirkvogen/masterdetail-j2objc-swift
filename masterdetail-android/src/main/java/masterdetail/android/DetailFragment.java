@@ -43,9 +43,18 @@ public class DetailFragment extends Fragment {
 	public static final String ARG_ITEM_ID = "item_id";
 
 	private DetailViewModel viewModel;
-	
-	private ViewModelListener<DetailViewModel> viewModelListener;
-	
+
+    public interface Callbacks extends ViewModelListener<DetailViewModel> {
+        void onListSaved();
+    }
+
+    private Callbacks callbacks = dummyCallbacks;
+
+    private static Callbacks dummyCallbacks = new Callbacks() {
+        public void onListSaved() {}
+        public void onViewModelCreated(DetailViewModel viewModel) {}
+    };
+
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
 	 * screen orientation changes).
@@ -57,7 +66,11 @@ public class DetailFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		this.viewModelListener = (ViewModelListener<DetailViewModel>) activity;
+        if (!(activity instanceof Callbacks)) {
+            throw new IllegalStateException("Activity must implement fragment's callbacks.");
+        }
+
+        callbacks = (Callbacks) activity;
 	}
 
 	@Override
@@ -66,8 +79,16 @@ public class DetailFragment extends Fragment {
 		
 		StorageService storageService = new LocalStorageService(getActivity());
 		viewModel = new DetailViewModel(new FlatFileDetailService(storageService));
-		viewModelListener.onViewModelCreated(viewModel);
+		callbacks.onViewModelCreated(viewModel);
 	}
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        // Reset the active callbacks interface to the dummy implementation.
+        callbacks = dummyCallbacks;
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,12 +105,12 @@ public class DetailFragment extends Fragment {
 			
 			@Override
 			public void propertyChange(PropertyChangeEvent event) {
-				if (DetailViewModel.TITLE.equals(event.getPropertyName())) {
-					title.setText((String) event.getNewValue());
-				}
-				else if (DetailViewModel.WORDS.equals(event.getPropertyName())) {
-					words.setText((String) event.getNewValue());
-				}
+			if (DetailViewModel.TITLE.equals(event.getPropertyName())) {
+				title.setText((String) event.getNewValue());
+			}
+			else if (DetailViewModel.WORDS.equals(event.getPropertyName())) {
+				words.setText((String) event.getNewValue());
+			}
 			}
 		});
 		
@@ -97,4 +118,18 @@ public class DetailFragment extends Fragment {
 
 		return rootView;
 	}
+
+    @Override
+    public void onPause() {
+        save();
+        super.onPause();
+    }
+
+    private void save()
+    {
+        final EditText title = (EditText) getView().findViewById(R.id.masterdetail_detail_title);
+        final EditText words = (EditText) getView().findViewById(R.id.masterdetail_detail_words);
+        viewModel.save(title.getText().toString(), words.getText().toString());
+        callbacks.onListSaved();
+    }
 }

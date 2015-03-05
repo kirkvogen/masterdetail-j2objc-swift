@@ -20,9 +20,11 @@ import masterdetail.model.DetailEntry;
 import masterdetail.service.FlatFileDetailService;
 import masterdetail.service.DetailService;
 import masterdetail.service.StorageService;
-import masterdetail.android.R;
+import masterdetail.viewmodel.DetailViewModel;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,10 +44,14 @@ import android.view.MenuItem;
  * for item selections.
  */
 public class MasterActivity extends Activity
-		implements MasterFragment.Callbacks {
+		implements MasterFragment.Callbacks, DetailFragment.Callbacks {
 	
+    private Loader loader;
+
 	/** Whether or not the activity is in two-pane mode, i.e. running on a tablet device. */
-	private boolean mTwoPane;
+	private boolean twoPane;
+
+    private DetailViewModel viewModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,7 @@ public class MasterActivity extends Activity
 			// The detail container view will be present only in the large-screen layouts
 			// (res/values-large and res/values-sw600dp). If this view is present, then the activity
 			// should be in two-pane mode.
-			mTwoPane = true;
+			twoPane = true;
 
 			// In two-pane mode, list items should be given the 'activated' state when touched.
 			((MasterFragment) getFragmentManager()
@@ -73,7 +79,7 @@ public class MasterActivity extends Activity
 	 */
 	@Override
 	public void onItemSelected(int id) {
-		if (mTwoPane) {
+		if (twoPane) {
 			// In two-pane mode, show the detail view in this activity by adding or replacing the
 			// detail fragment using a fragment transaction.
 			Bundle arguments = new Bundle();
@@ -91,7 +97,12 @@ public class MasterActivity extends Activity
 			startActivity(detailIntent);
 		}
 	}
-	
+
+    @Override
+    public void onLoaderCreated(Loader loader) {
+        this.loader = loader;
+    }
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -100,34 +111,38 @@ public class MasterActivity extends Activity
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.action_new:
-			StorageService storageService = new LocalStorageService(this);
-			DetailService detailService = new FlatFileDetailService(storageService);
-			DetailEntry list = detailService.create();
-			int id = list.getId();
-			if (mTwoPane) {
-				// In two-pane mode, show the detail view in this activity by adding or replacing
-				// the detail fragment using a fragment transaction.
-				Bundle arguments = new Bundle();
-				arguments.putInt(DetailFragment.ARG_ITEM_ID, id);
-				DetailFragment fragment = new DetailFragment();
-				fragment.setArguments(arguments);
-				getFragmentManager().beginTransaction()
-						.replace(R.id.masterdetail_detail_container, fragment)
-						.commit();
+    public void newAction(MenuItem menuItem)
+    {
+        StorageService storageService = new LocalStorageService(this);
+        DetailService detailService = new FlatFileDetailService(storageService);
+        DetailEntry list = detailService.create();
+        int id = list.getId();
+        if (twoPane) {
+            // In two-pane mode, show the detail view in this activity by adding or replacing
+            // the detail fragment using a fragment transaction.
+            Bundle arguments = new Bundle();
+            arguments.putInt(DetailFragment.ARG_ITEM_ID, id);
+            DetailFragment fragment = new DetailFragment();
+            fragment.setArguments(arguments);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.masterdetail_detail_container, fragment)
+                    .commit();
 
-			} else {
-				// In single-pane mode, simply start the detail activity for the selected item ID.
-				Intent detailIntent = new Intent(this, DetailActivity.class);
-				detailIntent.putExtra(DetailFragment.ARG_ITEM_ID, id);
-				startActivity(detailIntent);
-			}
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+        } else {
+            // In single-pane mode, simply start the detail activity for the selected item ID.
+            Intent detailIntent = new Intent(this, DetailActivity.class);
+            detailIntent.putExtra(DetailFragment.ARG_ITEM_ID, id);
+            startActivity(detailIntent);
+        }
+    }
+
+    @Override
+    public void onViewModelCreated(DetailViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    @Override
+    public void onListSaved() {
+        loader.onContentChanged();
+    }
 }

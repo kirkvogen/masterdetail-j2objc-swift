@@ -35,8 +35,7 @@ import android.widget.EditText;
  * This activity is mostly just a 'shell' activity containing nothing more than a
  * {@link DetailFragment}.
  */
-public class DetailActivity extends Activity
-implements ViewModelListener<DetailViewModel> {
+public class DetailActivity extends Activity implements DetailFragment.Callbacks {
 
 	private DetailViewModel viewModel;
 
@@ -101,4 +100,9 @@ implements ViewModelListener<DetailViewModel> {
 	public void onViewModelCreated(DetailViewModel viewModel) {
 		this.viewModel = viewModel;
 	}
+
+    @Override
+    public void onListSaved() {
+        // Nothing to do
+    }
 }
