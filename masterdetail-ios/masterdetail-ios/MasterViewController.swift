@@ -70,7 +70,7 @@ class MasterViewController: UITableViewController {
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         //self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailController = storyboard.instantiateViewControllerWithIdentifier("detailView") as DetailViewController
+        let detailController = storyboard.instantiateViewControllerWithIdentifier("detailView") as! DetailViewController
         detailController.listId = listId
         self.navigationController?.pushViewController(detailController, animated: false)
     }
@@ -80,7 +80,7 @@ class MasterViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 let listId = listIds[indexPath.row]
                 
                 controller.listId = listId
@@ -104,7 +104,7 @@ class MasterViewController: UITableViewController {
         
         for var i = 0; i < listSize; i++
         {
-            let list = lists.getWithInt(CInt(i)) as DetailEntry
+            let list = lists.getWithInt(CInt(i)) as! DetailEntry
             listIds += [list.getId()]
         }
         
@@ -112,7 +112,7 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         
         let listId = listIds[indexPath.row]
         let list = detailService.findWithInt(listId)

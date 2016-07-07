@@ -69,13 +69,13 @@ class DetailViewController: UIViewController, JavaBeansPropertyChangeListener {
         case DetailViewModel_TITLE_:
             if let textfield = listTitle {
                 if let newValue: AnyObject = event.getNewValue() {
-                    textfield.text = newValue as NSString
+                    textfield.text = newValue as! String
                 }
             }
         case DetailViewModel_WORDS_:
             if let textfield = words {
                 if let newValue: AnyObject = event.getNewValue() {
-                    textfield.text = newValue as NSString
+                    textfield.text = newValue as! String
                 }
             }
         default:
