@@ -285,7 +285,8 @@
 		4A71CCB619EF652C00A3535F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Kirk Vogen";
 				TargetAttributes = {
 					4A71CCBD19EF652C00A3535F = {
@@ -413,6 +414,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -487,6 +489,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "${J2OBJC_HOME}/lib";
 				OTHER_LDFLAGS = "-ljre_emul";
+				PRODUCT_BUNDLE_IDENTIFIER = "Kirk-Vogen.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/masterdetail-ios/masterdetail-ios-Bridging-Header.h";
 			};
@@ -507,6 +510,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "${J2OBJC_HOME}/lib";
 				OTHER_LDFLAGS = "-ljre_emul";
+				PRODUCT_BUNDLE_IDENTIFIER = "Kirk-Vogen.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/masterdetail-ios/masterdetail-ios-Bridging-Header.h";
 			};
@@ -526,6 +530,7 @@
 				);
 				INFOPLIST_FILE = "masterdetail-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Kirk-Vogen.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/masterdetail-ios.app/masterdetail-ios";
 			};
@@ -541,6 +546,7 @@
 				);
 				INFOPLIST_FILE = "masterdetail-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Kirk-Vogen.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/masterdetail-ios.app/masterdetail-ios";
 			};

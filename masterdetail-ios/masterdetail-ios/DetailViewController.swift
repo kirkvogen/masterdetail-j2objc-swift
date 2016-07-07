@@ -26,7 +26,7 @@ class DetailViewController: UIViewController, JavaBeansPropertyChangeListener {
     let detailService: DetailService
     let viewModel: DetailViewModel
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         detailService = FlatFileDetailService(storageService: LocalStorageService())
         viewModel = DetailViewModel(detailService: detailService)
         super.init(coder: decoder)
@@ -66,13 +66,13 @@ class DetailViewController: UIViewController, JavaBeansPropertyChangeListener {
         
         switch event.getPropertyName() {
             
-        case DetailViewModel_TITLE_:
+        case DetailViewModel_TITLE:
             if let textfield = listTitle {
                 if let newValue: AnyObject = event.getNewValue() {
-                    textfield.text = newValue as! String
+                    textfield.text = newValue as? String
                 }
             }
-        case DetailViewModel_WORDS_:
+        case DetailViewModel_WORDS:
             if let textfield = words {
                 if let newValue: AnyObject = event.getNewValue() {
                     textfield.text = newValue as! String

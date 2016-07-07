@@ -23,7 +23,7 @@ class MasterViewController: UITableViewController {
     
     let detailService: DetailService
 
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         detailService = FlatFileDetailService(storageService: LocalStorageService())
         super.init(coder: decoder)
     }
@@ -51,7 +51,7 @@ class MasterViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
+            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
     }
 
@@ -67,7 +67,7 @@ class MasterViewController: UITableViewController {
         let listId = list.getId()
         listIds += [listId]
         
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        _ = NSIndexPath(forRow: 0, inSection: 0)
         //self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailController = storyboard.instantiateViewControllerWithIdentifier("detailView") as! DetailViewController
@@ -79,14 +79,13 @@ class MasterViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                let listId = listIds[indexPath.row]
-                
-                controller.listId = listId
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+            let listId = listIds[indexPath!.row]
+            
+            controller.listId = listId
+            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+            controller.navigationItem.leftItemsSupplementBackButton = true
         }
     }
 
@@ -112,10 +111,10 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         
         let listId = listIds[indexPath.row]
-        let list = detailService.findWithInt(listId)
+        _ = detailService.findWithInt(listId)
         
         let viewModel = DetailViewModel(detailService: detailService, withNSString: " ")
         viewModel.init__WithInt(listId)

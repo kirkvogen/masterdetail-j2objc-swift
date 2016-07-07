@@ -7,20 +7,16 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>66CC3CB0-F978-4692-89D2-6AE7C501E2DA</string>
 	<key>IDESourceControlProjectName</key>
-	<string>masterdetail-ios</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>22EBEA5EFC2DD92D88F841E0B400372583D0C095</key>
-		<string>https://github.com/kirkvogen/masterdetail-j2objc-swift.git</string>
 		<key>442CAFEF4972DB2CBE4C74225A4CA6164FE37960</key>
 		<string>https://github.com/kirkvogen/masterdetail-j2objc-swift.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>masterdetail-ios/masterdetail-ios.xcodeproj</string>
+	<string>masterdetail-ios/masterdetail-ios.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>22EBEA5EFC2DD92D88F841E0B400372583D0C095</key>
-		<string>../../../../masterdetail</string>
 		<key>442CAFEF4972DB2CBE4C74225A4CA6164FE37960</key>
 		<string>../../..</string>
 	</dict>
@@ -32,14 +28,6 @@
 	<string>442CAFEF4972DB2CBE4C74225A4CA6164FE37960</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>22EBEA5EFC2DD92D88F841E0B400372583D0C095</string>
-			<key>IDESourceControlWCCName</key>
-			<string>masterdetail</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
